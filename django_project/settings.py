@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     #3rd-party
     "crispy_forms",  # new
     "crispy_bootstrap5",  # new
+    "allauth",  # new
+    "allauth.account",  # new
     #Local
     "accounts.apps.AccountsConfig",
     "pages.apps.PagesConfig",
@@ -123,7 +125,8 @@ USE_I18N = True
 
 USE_TZ = True
 
-
+LOGIN_REDIRECT_URL = "home"  # new
+LOGOUT_REDIRECT_URL = "home"  # new
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
@@ -137,9 +140,19 @@ STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"  #
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_REDIRECT_URL = "home"  # new
-LOGOUT_REDIRECT_URL = "home"  # new
 
 # django-crispy-forms
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"  # new
 CRISPY_TEMPLATE_PACK = "bootstrap5"  # new
+
+#django-allauth config
+LOGIN_REDIRECT_URL = "home"
+ACCOUNT_LOGOUT_REDIRECT = "home"  # new
+SITE_ID = 1 # new
+AUTHENTICATION_BACKENDS = (
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
+)
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+ACCOUNT_SESSION_REMEMBER = True  # new
+ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False  # new
