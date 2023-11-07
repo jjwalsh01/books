@@ -1,4 +1,4 @@
-version: "3.9"
+version: '3.9'
 
 services:
   web:
@@ -10,6 +10,9 @@ services:
       - 8000:8000
     depends_on:
       - db
+    environment:
+      - "DJANGO_SECRET_KEY=django-insecure-oa=^7$$y7dszh42g1$$b--r7f9!1ljq3uz^cq6um9*ou)1mg&b#r"
+      - "DJANGO_DEBUG=True"
   db:
     image: postgres:13
     volumes:
